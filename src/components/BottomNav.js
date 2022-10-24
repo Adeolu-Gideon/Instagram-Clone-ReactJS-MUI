@@ -8,9 +8,14 @@ import MovieIcon from '@mui/icons-material/Movie';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import SearchIcon from '@mui/icons-material/Search';
 import Paper from '@mui/material/Paper';
-import './BottomNav.css';
+//import './BottomNav.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { AccountBoxOutlined, AddBoxOutlined, FavoriteBorder, Home, AccountCircleOutlined, HomeOutlined } from '@mui/icons-material';
+import Search from '@mui/icons-material/Search';
+import { Avatar } from '@mui/material';
+import health from '../assets/health.png'
+
 
 
 
@@ -32,23 +37,25 @@ export default function FixedBottomNavigation() {
   
 
   return (
-    <Box sx={{ pb: 7 }} ref={ref}>
+    <Box sx={{ display: { md: 'none'}, pb: 7}} ref={ref}>
       <CssBaseline />
     
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} >
         <BottomNavigation
           showLabels
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
+          sx={{backgroundColor: 'white'}}
         >
-                  <BottomNavigationAction style={{ color: "white" }} label="Trending" icon={<WhatshotIcon />}/>
-          <BottomNavigationAction style={{ color: "white" }}  label="Movies" icon={<MovieIcon />} />
-          <BottomNavigationAction style={{ color: "white" }}  label="TV Series" icon={<TvIcon />} />
-          <BottomNavigationAction style={{ color: "white" }} label="Search" icon={<SearchIcon />} />
+          <BottomNavigationAction style={{ color: "black" }}  icon={<HomeOutlined />}/>
+          <BottomNavigationAction style={{ color: "black" }}   icon={<Search />} />
+          <BottomNavigationAction style={{ color: "black" }}  icon={<AddBoxOutlined />} />
+          <BottomNavigationAction style={{ color: "black" }}  icon={<FavoriteBorder />} />
+          <BottomNavigationAction style={{ color: "black" }}  icon={<AccountCircleOutlined />} />
         </BottomNavigation>
-      </Paper>
+      </Box>
     </Box>
   );
 }

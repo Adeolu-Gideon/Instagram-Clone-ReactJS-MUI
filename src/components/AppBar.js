@@ -3,69 +3,110 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import './AppBar.css'
-import avartar from '../assets/avartar.png'
-import Netflixlogo from '../assets/Netflixlogo.png'
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import health from '../assets/health.png'
+import instagramlogo from '../assets/instagramlogo.png';
+import { FavoriteBorder, Home, ExploreOutlined, NearMeOutlined, AddBoxOutlined, Sync,  BookmarkBorder, AccountCircleOutlined, SettingsOutlined } from '@mui/icons-material';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import Logout from '@mui/icons-material/Logout';
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import Stories from './Stories';
 
 
-const pages = ['Home', 'TV Shows', 'Movies', 'News & Popular', 'My List', 'Audio & Subtitles'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.black, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '30ch',
+      '&:focus': {
+        width: '40ch',
+      },
+    },
+  },
+}));
 
 
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const [anchorElNav, setAnchorElNav] = React.useState(null);
+  // const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  // const handleOpenNavMenu = (event) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
+  // const handleOpenUserMenu = (event) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
+
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null);
+  // };
+
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
 
   return (
-    <AppBar sx={{BackgroundColor: 'red'}}>
+    <AppBar sx={{
+      display: {
+        xs: 'none', lg: 'flex', md: 'flex'
+      }
+    }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-           <Avatar sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, width:'32px', height: '32px' }} alt="Netflix logo" src={Netflixlogo}/>
+          <img style={{ display: { xs: 'none', md: 'flex' }, mr: 1, width: '120px', height: 'auto' }} alt="Instagram logo" src={instagramlogo} />
           {/* <Avatar sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: '#aa011a',
-              textDecoration: 'none',
-            }}
-          >
-             NOVAFLIX
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          
+          
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -100,71 +141,124 @@ const ResponsiveAppBar = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          <Avatar sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, width:'24px', height: '24px' }} alt="Netflix logo" src={Netflixlogo}/>
+          </Box> */}
+          
           {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.1rem',
-              color: '#aa011a',
-              textDecoration: 'none',
-            }}
-          >
-            NOVAFLIX
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+          
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, marginLeft: '60px', }}>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
           </Box>
 
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{  display: { md: 'flex', xs: 'none' } }}>
+
+            <IconButton sx={{ color: 'black'}}>
+              <Home />
+            </IconButton>
+            <IconButton sx={{ color: 'black'}}>
+              <NearMeOutlined />
+            </IconButton>
+            <IconButton sx={{color: 'black'}}>
+              <AddBoxOutlined />
+            </IconButton>
+            <IconButton sx={{color: 'black'}}>
+              <ExploreOutlined />
+            </IconButton>
+            <IconButton sx={{ color: 'black'}}>
+              <FavoriteBorder />
+            </IconButton>
             
-              <IconButton color="inherit">
-                  <NotificationsIcon/>
-              </IconButton>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                              <Avatar alt="Remy Sharp" src={avartar} sx={{width:'24px', height: '24px'} }/>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+              {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
+                {/* <Avatar alt="Remy Sharp" src={health} sx={{ width: '24px', height: '24px' }} /> */}
+                <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                  
+                  <Tooltip title="Account settings">
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      aria-controls={open ? 'account-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                    >
+                  <Avatar alt="profile picture" src={health} sx={{ width: 24, height: 24 }}></Avatar>
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+                <Menu
+                  anchorEl={anchorEl}
+                  id="account-menu"
+                  open={open}
+                  onClose={handleClose}
+                  onClick={handleClose}
+                  PaperProps={{
+                    elevation: 0,
+                    sx: {
+                      overflow: 'visible',
+                      filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                      mt: 1.5,
+                      '& .MuiAvatar-root': {
+                        width: 32,
+                        height: 32,
+                        ml: -0.5,
+                        mr: 1,
+                      },
+                      '&:before': {
+                        content: '""',
+                        display: 'block',
+                        position: 'absolute',
+                        top: 0,
+                        right: 14,
+                        width: 10,
+                        height: 10,
+                        bgcolor: 'background.paper',
+                        transform: 'translateY(-50%) rotate(45deg)',
+                        zIndex: 0,
+                      },
+                    },
+                  }}
+                  transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                >
+                  <MenuItem>
+                    <ListItemIcon>
+                      <AccountCircleOutlined fontSize="small" />
+                    </ListItemIcon>
+                    Profile
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <BookmarkBorder fontSize="small" />
+                    </ListItemIcon>
+                    Saved
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                  <SettingsOutlined fontSize="small" />
+                    </ListItemIcon>
+                Settings
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <Sync fontSize="small" />
+                    </ListItemIcon>
+                    Switch Account
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem>
+                    <ListItemIcon>
+                      <Logout fontSize="small" />
+                    </ListItemIcon>
+                    Logout
+                  </MenuItem>
+                </Menu>
+            
           </Box>
         </Toolbar>
       </Container>
